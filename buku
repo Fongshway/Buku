@@ -1394,7 +1394,8 @@ def browser_open(url):
     os.dup2(fd, 2)
     os.dup2(fd, 1)
     try:
-        webbrowser.open(url)
+        from subprocess import call
+        call(["cygstart", url])
     except Exception as e:
         _, _, linenumber, func, _, _ = inspect.stack()[0]
         logger.error('%s(), ln %d: %s', func, linenumber, e)
